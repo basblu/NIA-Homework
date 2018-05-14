@@ -8,29 +8,24 @@ class SolutionGenerator():
         self.alpha = alpha
         self.beta = beta
 
-        self.task_matrix = task.get_task_matrix()
-
 
     def set_task(self, task):
         self.task = task
         self.task_matrix = task.get_task_matrix()
 
     def generate_solution(self, pheromone_matrix):
-        num_citys = self.task_matrix.shape[0]
+        num_citys = len(self.task_matrix[0])
 
         cities = np.arange(0,num_citys,1)
-
-
 
         eta_matrix = np.ones((num_citys,num_citys))
         for i in range(num_citys):
             for j in range(num_citys):
 
                 if i == j:
-                    eta_matrix[i,j] = 0
+                    eta_matrix[i][j] = 0
                 else:
-                    eta_matrix[i,j] = 1/self.task_matrix[i,j]
-
+                    eta_matrix[i][j] = 1/self.task_matrix[i][j]
 
 
         city = np.random.choice(cities,1,False)
@@ -42,11 +37,12 @@ class SolutionGenerator():
         cities = np.delete(cities,city)
 
         cities = np.arange(1,num_citys,1)
-        eta_matrix = 1 / self.task_matrix
+
+        eta_matrix = 1/self.task_matrix
 
         city = np.random.choice(cities,1,False)
         
-        cities = cities.delete(city) #needs an index or something (you ment delete and not remove, right?)
+        cities = np.delete(cities, city)
 
         solution = np.array([city])
 
@@ -92,7 +88,6 @@ class SolutionGenerator():
 
 
         solutions = list()
-        print(solutions)
         evaluations = list()
 
         for ant in range(self.num_of_ants):

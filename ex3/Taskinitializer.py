@@ -20,13 +20,14 @@ class Taskinitializer():
 
     def get_task_matrix(self):
         with open('TSPs/'+self.file) as filereader:
-                task_matrix = []
+                task_matrix = list()
                 for line in filereader:
                     row = line.split(' ')
                     for i in range(len(row) - 1):
                         row[i] = int(row[i])
                     row = row[0:-1]
                     task_matrix.append(row)
+
         return np.asarray(task_matrix)
 
     def solution_evaluator(self, solution):

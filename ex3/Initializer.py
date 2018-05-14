@@ -4,7 +4,7 @@ class Initializer():
 
     def initialize(self,task):
         task_matrix = task.get_task_matrix()
-        len = task_matrix.shape[0]
-        return np.ones((len,len)) 
+        size = len(task_matrix[0])
+        return np.ones((size,size)) 
     
-    #hi
+    #greetings, stranger
